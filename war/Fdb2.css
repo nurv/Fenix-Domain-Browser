@@ -1,0 +1,169 @@
+/** Add css rules here for your application. */
+body {
+	margin: 0px;
+}
+
+#header {
+	height: 100px;
+	background: white;
+}
+
+#content {
+	
+}
+
+.searchableField {
+	
+}
+
+.searchField {
+	margin-left: auto;
+	margin-right: auto;
+	width: 170px;
+}
+
+.popup {
+	background-color: gray;
+	border-color: gray gray gray gray;
+	border-width: 1px 3px 3px 1px;
+	border-style: solid solid solid solid;
+}
+
+.popup-item {
+	font-weight: normal;
+	font-size: 80%;
+}
+
+.icon {
+	margin: 5px 10px 6px 10px;
+}
+
+.GWTUpld, table.GWTUpld td {
+}
+
+.GWTUpld form, 
+.GWTUpld .upld-form-elements {
+    padding: 0px;
+    vertical-align: top;
+}
+
+.GWTUpld .upld-status {
+    font-weight: bold;
+}
+.GWTUpld .upld-status div.cancel {
+    background: url(/icons/cross.png) no-repeat;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    margin-top: 1px;
+}
+
+* html .GWTUpld .upld-status div.cancel {
+    width: 14px;
+    height: 10px;
+    margin-top: 2px;
+}
+
+.GWTUpld .upld-status div.cancel:hover {
+    background: url(/icons/cross.png) no-repeat;
+}
+
+.GWTUpld .upld-status .filename {
+    overflow: hidden;
+    white-space: nowrap;
+    margin-left: 8px;
+    margin-right: 10px;
+    height: 100%;
+}
+.GWTUpld .upld-status .status {
+    padding-left: 8px;
+    white-space: nowrap;
+    height: 100%;
+}
+.GWTUpld .upld-status .status-success {
+    color: green;
+}
+.GWTUpld .upld-status .status-error,
+.GWTUpld .upld-status .status-canceled {
+    color: red;
+}
+
+.GWTUpld .prgbar-back {
+    background: #ffffff none repeat scroll 0 0;
+    border: 1px solid #999999;
+    height: 10px;
+    overflow: hidden;
+    padding: 1px;
+    width: 100px;
+    float: left;
+}
+* html .GWTUpld .prgbar-back {
+    height: 12px;
+    margin-top: 2px;
+}
+.GWTUpld .prgbar-done {
+    background: #d4e4ff none repeat scroll 0 0;
+    font-size: 0;
+    height: 100%;
+    float: left;
+}
+.GWTUpld .prgbar-msg {
+    position: absolute;
+    z-index: 9;
+    font-size: 9px;
+    font-weight: normal;
+    margin-left: 3px;
+}
+
+* html .GWTUpld .prgbar-msg {
+    top: 0px;
+    left: 4px;
+}
+
+.GWTUpld .changed {
+    color: red;
+    font-weight: bold;  
+    text-decoration: blink;
+}
+.gwt-PopupPanel .GWTUpld {
+    border: 0px;
+    padding: 10px;
+    background: white;
+}
+
+.GWTUpld .DecoratedFileUpload {
+    margin-right: 5px;
+}
+
+.GWTUpld .DecoratedFileUpload .gwt-Button,
+.GWTUpld .DecoratedFileUpload .gwt-Anchor,
+.GWTUpld .DecoratedFileUpload .gwt-Label {
+    white-space: nowrap;
+}
+
+.GWTUpld .gwt-Button, .GWTUpld .gwt-FileUpload {
+    min-height: 15px;
+}
+
+.GWTUpld .DecoratedFileUpload .gwt-Anchor,
+.GWTUpld .DecoratedFileUpload .gwt-Label {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.GWTUpld .gwt-Button:HOVER,
+.GWTUpld .DecoratedFileUpload .gwt-Button-over,
+.GWTUpld .DecoratedFileUpload .gwt-Anchor-over,
+.GWTUpld .DecoratedFileUpload .gwt-Label-over {
+    color: #af6b29;
+}
+
+.GWTUpld .DecoratedFileUpload-disabled .gwt-Button,
+.GWTUpld .DecoratedFileUpload-disabled .gwt-Anchor,
+.GWTUpld .DecoratedFileUpload-disabled .gwt-Label {
+    color: grey;
+}
+
+    
+

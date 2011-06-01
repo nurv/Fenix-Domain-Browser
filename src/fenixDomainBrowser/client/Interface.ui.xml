@@ -1,0 +1,81 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:f="urn:import:fenixDomainBrowser.client" xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.table {
+			width: 100%;
+		}
+		
+		.header {
+			font-weight: bold;
+		}
+		
+		.padding {
+			padding: 5px 10px 4px 10px;
+			margin: 0px 10px 0px 0px;
+		}
+		
+		.table {
+			border: 1px solid #BDC7DA;
+		}
+		@if user.agent gecko1_8 { 
+			.menu {
+				background-color: #EBEFF9;
+				border-bottom: 1px solid #6B90DA;
+				padding: 5px 10px 4px 10px;
+			}
+		} @else {
+			.menu {
+				background-color: #EBEFF9;
+				border-bottom: 1px solid #6B90DA;
+				padding: 5px 10px 6px 10px;
+			}	
+		}
+		.modelName {
+			text-decoration: underline;
+			cursor:pointer;
+			margin-top:8px;
+		}
+	</ui:style>
+	<g:DockLayoutPanel ui:field="overall">
+		<g:north size="110">
+			<g:VerticalPanel width="100%">
+				<g:HTML>
+					<div style='height:69px; background:url("/logo.png") no-repeat;'>&nbsp;</div>
+				</g:HTML>
+				<g:VerticalPanel styleName="{style.menu}" width="100%">
+					<g:HorizontalPanel>
+						<f:CustomButton addStyleNames="{style.padding}"
+							text="New" imageUp="/icons/document--arrow.png" ui:field="newDomainModel"></f:CustomButton>
+						<f:CustomButton addStyleNames="{style.padding}"
+							text="Save" imageUp="/icons/disk.png" ui:field="save"></f:CustomButton>
+						<f:CustomButton addStyleNames="{style.padding}"
+							text="Open" imageUp="/icons/folder.png" ui:field="open"></f:CustomButton>
+						<f:CustomButton addStyleNames="{style.padding}"
+							text="Print" imageUp="/icons/printer.png" ui:field="print"></f:CustomButton>
+						<f:CustomButton addStyleNames="{style.padding}"
+							text="Image" imageUp="/icons/image.png" ui:field="image"></f:CustomButton>
+						<f:CustomButton addStyleNames="{style.padding}"
+							text="Relation Exploration" imageUp="/icons/magnifier.png"
+							imageDown="/icons/magnifier--minus.png" ui:field="relationExplorationButton"></f:CustomButton>
+						<f:CustomButton addStyleNames="{style.padding}"
+							text="Single Label" imageUp="/icons/highlighter.png" imageDown="/icons/highlighter--minus.png"
+							ui:field="singleLabelRelationButton"></f:CustomButton>
+						<f:CustomButton addStyleNames="{style.padding}"
+							text="Slots" imageUp="/icons/layer.png" imageDown="/icons/layer--minus.png"
+							ui:field="hsallslotsButton"></f:CustomButton>
+						<g:SimplePanel addStyleNames="{style.modelName}">
+							<g:Anchor text="No model open" ui:field="modelName"></g:Anchor>
+						</g:SimplePanel>
+					</g:HorizontalPanel>
+				</g:VerticalPanel>
+			</g:VerticalPanel>
+		</g:north>
+		<g:center>
+			<g:HTML ui:field="content">
+				<div style="margin:30px; color:#aaa">To start using the domain browser either load a new
+					domain model or open a saved file.</div>
+			</g:HTML>
+		</g:center>
+	</g:DockLayoutPanel>
+</ui:UiBinder> 

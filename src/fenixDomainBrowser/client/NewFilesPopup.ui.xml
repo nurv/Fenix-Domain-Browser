@@ -1,0 +1,55 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:upload="gwtupload.client"
+	xmlns:f="urn:import:fenixDomainBrowser.client">
+	<ui:style>
+		.label {
+			margin-top: 10px;
+			margin-botom: 5px;
+		}
+		
+		.controls {
+			margin-top: 20px;
+			margin-bottom: 10px;
+		}
+		
+		.button {
+			margin-left: 5px;
+		}
+		
+		.impt {
+			border: 2px solid #D0E4F6;
+			background-color: #E2EDF6;
+		}
+	</ui:style>
+
+	<g:VerticalPanel>
+		<g:HTML>
+			<div
+				style='font-weight:bold; width:490px; margin:0px; padding:5px; font-size:20px; background:#C3D9FF; margin-bottom:10px;'>New Model</div>
+		</g:HTML>
+		<g:VerticalPanel ui:field="content">
+			<g:Label addStyleNames="{style.label}" text="Model Name:"></g:Label>
+			<g:TextBox addStyleNames="{style.impt}" ui:field="modelName" text="Unnamed model"></g:TextBox>
+
+			<g:Label addStyleNames="{style.label}"
+				text="Model Package beginning string to ignore:"></g:Label>
+			<g:TextBox addStyleNames="{style.impt}" ui:field="modelPackageHeader"></g:TextBox>
+
+			<g:Label addStyleNames="{style.label}"
+				text="Add all files relevant for the domain model you want to inspect:"></g:Label>
+
+			<g:SimplePanel ui:field="uploader">
+
+			</g:SimplePanel>
+			<g:HorizontalPanel addStyleNames="{style.controls}">
+				<g:Button addStyleNames="{style.button}" ui:field="load"
+					text="Load"></g:Button>
+				<g:Button addStyleNames="{style.button}" ui:field="cancel"
+					text="Cancel"></g:Button>
+			</g:HorizontalPanel>
+		</g:VerticalPanel>
+
+	</g:VerticalPanel>
+
+</ui:UiBinder> 
