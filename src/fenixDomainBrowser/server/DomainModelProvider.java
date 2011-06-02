@@ -83,7 +83,7 @@ public class DomainModelProvider {
 		}
 		domainModel = DML.getDomainModelForURLs(FenixDomainModelWithOCC.class, domainModelURLs, true);
 	    } catch (Exception e) {
-		throw new RuntimeException("error loading DML");
+		throw new RuntimeException("error loading DML",e);
 	    }
 	    setDomainModelDefinitions(dmd);
 

@@ -31,7 +31,7 @@ public class ClassNode extends Node {
     private String genSlotString(FDBState state) {
 	String v = "{" + classBean.getQualifiedName() + "|";
 	for (SlotBean s : FenixDomainBrowserRelayImpl.DOMAIN_PROVIDER.getSlots(classBean, state)) {
-	    v += "+ " + s.getType() + " : " + s.getName() + "\\l";
+	    v += "+ " +  s.getName() + " : " + s.getType() + "\\l";
 	}
 	v += "}";
 	return v;
