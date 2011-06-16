@@ -5,7 +5,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -15,7 +18,6 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import dml.DomainClass;
 import fenixDomainBrowser.client.FenixDomainBrowserRelay;
-import fenixDomainBrowser.client.Interface;
 import fenixDomainBrowser.client.NewFilesPopup.OpenFilesState;
 import fenixDomainBrowser.server.DomainModelProvider.DomainModelDefinitions;
 import fenixDomainBrowser.shared.ClassBean;
@@ -55,8 +57,42 @@ public class FenixDomainBrowserRelayImpl extends RemoteServiceServlet implements
 	return ReflexFactory.fromClass(DOMAIN_PROVIDER.getDomainModel(bean.getSignature()).findClass(name), bean);
     }
 
+    private void dumpFiles(OpenFilesState files) {
+	try {
+	    List<String> result = new ArrayList<String>();
+	    for (String s : files.files) {
+		ZipFile zipFile = new ZipFile(s);
+		for (Enumeration list = zipFile.entries(); list.hasMoreElements();) {
+		    ZipEntry entry = (ZipEntry) list.nextElement();
+		    InputStream eis = zipFile.getInputStream(entry);
+		    byte[] buffer = new byte[1024];
+		    int bytesRead = 0;
+
+		    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+		    while ((bytesRead = eis.read(buffer)) != -1) {
+			baos.write(buffer, 0, bytesRead);
+		    }
+		    File f = File.createTempFile("dmlFromZip", ".dml");
+		    FileOutputStream fos = new FileOutputStream(f.getAbsoluteFile());
+		    fos.write(baos.toByteArray());
+		    fos.close();
+		    result.add(f.getAbsoluteFile().getAbsolutePath());
+		}
+	    }
+	    files.files = result;
+	} catch (IOException e) {
+	    throw new RuntimeException(e);
+	}
+    }
+
     @Override
     public FDBState loadFiles(OpenFilesState files) {
+	if (files.zip) {
+	    
+	    dumpFiles(files);
+	}
+	
 	DomainModelSignatures dms = DOMAIN_PROVIDER.loadFiles(files);
 	FDBState state = new FDBState(dms);
 	FenixDomainModel domainModel = DOMAIN_PROVIDER.getDomainModel(dms);
@@ -132,7 +168,7 @@ public class FenixDomainBrowserRelayImpl extends RemoteServiceServlet implements
     @Override
     public String saveStateForOtherOps(FDBState state) {
 	JSONSerializer serializerState = new JSONSerializer().include("classesToSee", "classesInGraph", "hideSlots",
-		"hideClasses", "exclusiveSelection", "signature","signature.signatures");
+		"hideClasses", "exclusiveSelection", "signature", "signature.signatures");
 	try {
 	    String serialState = serializerState.serialize(state);
 	    File tempFile = File.createTempFile("otherOps", ".state");

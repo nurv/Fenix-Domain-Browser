@@ -4,6 +4,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Image;
 
@@ -76,7 +77,7 @@ public class CustomButton extends Button {
     }
 
     public void setImageDown(String imageDown) {
-	this.imageDown = new Image(imageDown);
+	this.imageDown = new Image(FenixDomainBrowser.getContext() + imageUp);
 	update();
     }
 
@@ -85,7 +86,7 @@ public class CustomButton extends Button {
     }
 
     public void setImageUp(String imageUp) {
-	this.imageUp = new Image(imageUp);
+	this.imageUp = new Image(FenixDomainBrowser.getContext() + imageUp);
 	update();
     }
 

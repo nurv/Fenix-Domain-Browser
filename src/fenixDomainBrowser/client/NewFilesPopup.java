@@ -20,6 +20,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -53,7 +54,11 @@ public class NewFilesPopup extends PopupPanel{
     @UiField
     VerticalPanel content;
     
+    @UiField
+    CheckBox zip;
+    
     public static class OpenFilesState implements Serializable{
+	public boolean zip;
 	public List<String> files = new ArrayList<String>();
     }
     OpenFilesState files = new OpenFilesState();
@@ -69,7 +74,8 @@ public class NewFilesPopup extends PopupPanel{
 	    public void onFinish(IUploader uploader) {
 		
 		if (uploader.getStatus() == Status.SUCCESS) {
-		    files.files.add(uploader.getServerInfo().message);
+		    if(uploader.getServerInfo().message == null) { Window.alert("got null"); }
+		    files.files.add(uploader.getServerInfo().message );
 		}
 	    }
 	});
@@ -85,6 +91,7 @@ public class NewFilesPopup extends PopupPanel{
 		final Label label = new Label("Loading...");
 		content.add(label);
 		center();
+		files.zip = zip.getValue();
 		Interface.RELAY.loadFiles(files, new AsyncCallback<FDBState>() {
 		    
 		    @Override

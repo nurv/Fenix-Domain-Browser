@@ -21,7 +21,7 @@ public class RelationEdge extends Edge {
 	if (singleRelation) {
 	    add("label", "[" + getMultiplicity(first) + "," + getMultiplicity(second) + "]");
 	} else {
-	    add("arrowhead", "none").add("headlabel", getMultiplicity(first)).add("taillabel", getMultiplicity(second));
+	    add("arrowhead", "none").add("headlabel", getMultiplicity(second)).add("taillabel", getMultiplicity(first));
 	}
 	add("color", "red").add("labeltooltip", tooltip).add("style", "bold");
     }

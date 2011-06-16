@@ -41,7 +41,7 @@
 		<g:north size="110">
 			<g:VerticalPanel width="100%">
 				<g:HTML>
-					<div style='height:69px; background:url("/logo.png") no-repeat;'>&nbsp;</div>
+					<div style='height:69px; background:url("logo.png") no-repeat;'>&nbsp;</div>
 				</g:HTML>
 				<g:VerticalPanel styleName="{style.menu}" width="100%">
 					<g:HorizontalPanel>

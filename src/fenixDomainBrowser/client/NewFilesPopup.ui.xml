@@ -36,9 +36,11 @@
 				text="Model Package beginning string to ignore:"></g:Label>
 			<g:TextBox addStyleNames="{style.impt}" ui:field="modelPackageHeader"></g:TextBox>
 
+			<g:CheckBox addStyleNames="{style.label}" ui:field="zip" text="Is a zip file containing the entire model?"></g:CheckBox>
+
 			<g:Label addStyleNames="{style.label}"
 				text="Add all files relevant for the domain model you want to inspect:"></g:Label>
-
+			
 			<g:SimplePanel ui:field="uploader">
 
 			</g:SimplePanel>
