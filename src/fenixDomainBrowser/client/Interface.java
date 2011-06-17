@@ -3,9 +3,13 @@ package fenixDomainBrowser.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.HistoryListener;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
@@ -60,9 +64,8 @@ public class Interface extends Composite {
 
     @UiField
     CustomButton image;
-    
+
     DashBoard dashboard;
-    
 
     public Interface() {
 	Interface.currentInterface = this;
@@ -80,6 +83,7 @@ public class Interface extends Composite {
 			ClassBean cl = Interface.currentState.getClassesToSee().get(
 				Interface.currentState.getClassesToSee().size() - 1);
 			Interface.currentState.addClassesToSee(cl);
+			History.newItem("seeClass:" + cl.getId());
 			Interface.refresh();
 		    } else {
 			Interface.refresh(Interface.currentState);
@@ -199,18 +203,32 @@ public class Interface extends Composite {
 		new InformationPopup().show();
 	    }
 	});
+	History.addValueChangeHandler(new ValueChangeHandler<String>() {
+	    
+	    @Override
+	    public void onValueChange(ValueChangeEvent<String> event) {
+		String historyToken = event.getValue();
+		if (historyToken.subSequence(0, "seeClass:".length()).equals("seeClass:")){
+		    String s = historyToken.substring("seeClass:".length());
+		    currentState.addClassesToSee(Interface.currentInterface.dashboard.search.getClassBeanForName(s), true);
+		    Interface.refresh();
+		}
+	    }
+	});
+	
     }
 
     public native Object openWindow()/*-{
-	return $wnd.open("about:blank", "_blank", "");
+		return $wnd.open("about:blank", "_blank", "");
     }-*/;
-    
+
     public native void changeUrl(String where, Object win)/*-{
-        win.window.location = where;
+		win.window.location = where;
     }-*/;
-    
+
     public static void injectSVG(String s) {
-	String pattern = s.replaceAll("xlink:title=\"([^(\"]*)\"", "xlink:title=\"$1\" style=\"cursor:pointer;\" onclick=\"dispatchClick('$1')\"");
+	String pattern = s.replaceAll("xlink:title=\"([^(\"]*)\"",
+		"xlink:title=\"$1\" style=\"cursor:pointer;\" onclick=\"dispatchClick('$1')\"");
 	DOM.getElementById("loc").setInnerHTML(pattern);
     }
 

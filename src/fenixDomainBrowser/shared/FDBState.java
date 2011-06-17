@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.google.gwt.user.client.History;
+
 public class FDBState implements Serializable {
 
     private boolean relationExploration;
@@ -24,13 +26,14 @@ public class FDBState implements Serializable {
     private int classes;
     private int relations;
     private int valueTypes;
+
     public FDBState() {
     }
-    
+
     public FDBState(DomainModelSignatures signature) {
-	this.setSignature(signature); 
+	this.setSignature(signature);
     }
-    
+
     public Boolean getRelationExploration() {
 	return relationExploration;
     }
@@ -76,12 +79,19 @@ public class FDBState implements Serializable {
     }
 
     public void addClassesToSee(ClassBean cl) {
+	addClassesToSee(cl, false);
+    }
+    
+    public void addClassesToSee(ClassBean cl,boolean silent) {
+	if (!silent && classesToSee.size() > 0){
+	    History.newItem("seeClass:" + classesToSee.get(classesToSee.size() - 1).getId());
+	}
 	if (!relationExploration) {
-		classesToSee.clear();
-	    }
+	    classesToSee.clear();
+	}
 	if (!classesToSee.contains(cl)) {
 	    classesToSee.add(cl);
-	}else{
+	} else {
 	    classesToSee.remove(cl);
 	    classesToSee.add(cl);
 	}

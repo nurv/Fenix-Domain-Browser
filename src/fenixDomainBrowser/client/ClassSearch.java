@@ -11,6 +11,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextBox;
@@ -48,7 +49,7 @@ public class ClassSearch extends Composite {
 	    public void onSelectionChange(SelectionChangeEvent event) {
 		ClassBean b = selectionModel.getSelectedObject();
 		FDBState bean = Interface.currentState;
-		bean.addClassesToSee(b);
+		History.newItem("seeClass:" + b.getId());
 		Interface.refresh();
 	    }
 	});
