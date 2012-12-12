@@ -64,6 +64,9 @@
 						<f:CustomButton addStyleNames="{style.padding}"
 							text="Slots" imageUp="/icons/layer.png" imageDown="/icons/layer--minus.png"
 							ui:field="hsallslotsButton"></f:CustomButton>
+						<f:CustomButton addStyleNames="{style.padding}"
+							text="FenixDMLFromFenix" imageUp="/icons/layer.png" imageDown="/icons/layer--minus.png"
+							ui:field="freshDML"></f:CustomButton>
 						<g:SimplePanel addStyleNames="{style.modelName}">
 							<g:Anchor text="No model open" ui:field="modelName"></g:Anchor>
 						</g:SimplePanel>

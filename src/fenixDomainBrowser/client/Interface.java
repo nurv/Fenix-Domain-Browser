@@ -9,14 +9,16 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.HistoryListener;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+import fenixDomainBrowser.client.NewFilesPopup.LoadClassesCallback;
 import fenixDomainBrowser.shared.ClassBean;
 import fenixDomainBrowser.shared.FDBState;
 
@@ -64,6 +66,9 @@ public class Interface extends Composite {
 
     @UiField
     CustomButton image;
+
+    @UiField
+    CustomButton freshDML;
 
     DashBoard dashboard;
 
@@ -168,13 +173,13 @@ public class Interface extends Composite {
 
 			@Override
 			public void onSuccess(String result) {
-			 changeUrl(GWT.getHostPageBaseURL() + "printFile?filename=" + result,win);
+			    changeUrl(GWT.getHostPageBaseURL() + "printFile?filename=" + result, win);
 			}
 		    });
 		}
 	    }
 	});
-	
+
 	image.addClickHandler(new ClickHandler() {
 
 	    @Override
@@ -190,41 +195,56 @@ public class Interface extends Composite {
 
 			@Override
 			public void onSuccess(String result) {
-			 changeUrl(GWT.getHostPageBaseURL() + "imageFile?filename=" + result,win);
+			    changeUrl(GWT.getHostPageBaseURL() + "imageFile?filename=" + result, win);
 			}
 		    });
 		}
 	    }
 	});
 	modelName.addClickHandler(new ClickHandler() {
-	    
+
 	    @Override
 	    public void onClick(ClickEvent event) {
 		new InformationPopup().show();
 	    }
 	});
+
+	freshDML.addClickHandler(new ClickHandler() {
+
+	    @Override
+	    public void onClick(ClickEvent arg0) {
+		final PopupPanel popupPanel = new PopupPanel();
+		popupPanel.setWidth("500px");
+		popupPanel.add(new Label("Loading DML from SVN ..."));
+		popupPanel.center();
+		popupPanel.show();
+		RELAY.freshDML(new LoadClassesCallback(popupPanel, "Loading DML from SVN ...", "Fenix Live",
+			"net.sourceforge.fenixedu.domain"));
+	    }
+	});
+
 	History.addValueChangeHandler(new ValueChangeHandler<String>() {
-	    
+
 	    @Override
 	    public void onValueChange(ValueChangeEvent<String> event) {
 		String historyToken = event.getValue();
-		if (historyToken.subSequence(0, "seeClass:".length()).equals("seeClass:")){
+		if (historyToken.subSequence(0, "seeClass:".length()).equals("seeClass:")) {
 		    String s = historyToken.substring("seeClass:".length());
 		    currentState.addClassesToSee(Interface.currentInterface.dashboard.search.getClassBeanForName(s), true);
 		    Interface.refresh();
 		}
 	    }
 	});
-	
+
     }
 
     public native Object openWindow()/*-{
-		return $wnd.open("about:blank", "_blank", "");
-    }-*/;
+				     return $wnd.open("about:blank", "_blank", "");
+				     }-*/;
 
     public native void changeUrl(String where, Object win)/*-{
-		win.window.location = where;
-    }-*/;
+							  win.window.location = where;
+							  }-*/;
 
     public static void injectSVG(String s) {
 	String pattern = s.replaceAll("xlink:title=\"([^(\"]*)\"",
@@ -238,10 +258,10 @@ public class Interface extends Composite {
     }
 
     private native void initInjectFunctionForDispatch()/*-{
-		$wnd.dispatchClick = function(type) {
-			@fenixDomainBrowser.client.Interface::disptach(Ljava/lang/String;)(type);
-		}
-    }-*/;
+						       $wnd.dispatchClick = function(type) {
+						       @fenixDomainBrowser.client.Interface::disptach(Ljava/lang/String;)(type);
+						       }
+						       }-*/;
 
     public static void refresh(FDBState state) {
 	currentState = state;
