@@ -8,8 +8,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Arrays;
 
 public class Dot {
     public static String slurp(String path) {
@@ -61,7 +59,7 @@ public class Dot {
 
 	    int c;
 	    Process p = Runtime.getRuntime().exec(
-		    "/usr/local/bin/dot -T" + type + " -o" + temp.getAbsolutePath() + "." + type + " " + temp.getAbsolutePath());
+		    "/usr/bin/dot -T" + type + " -o" + temp.getAbsolutePath() + "." + type + " " + temp.getAbsolutePath());
 	    p.getInputStream().read();
 	    File f = new File(temp.getAbsolutePath() + "." + type);
 	    byte[] ba = new byte[(int) f.length()];
