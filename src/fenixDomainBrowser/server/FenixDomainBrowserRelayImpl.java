@@ -5,12 +5,16 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+
+import org.apache.commons.io.FileUtils;
 
 import pt.ist.fenixframework.pstm.dml.FenixDomainModel;
 
@@ -89,10 +93,10 @@ public class FenixDomainBrowserRelayImpl extends RemoteServiceServlet implements
     @Override
     public FDBState loadFiles(OpenFilesState files) {
 	if (files.zip) {
-	    
+
 	    dumpFiles(files);
 	}
-	
+
 	DomainModelSignatures dms = DOMAIN_PROVIDER.loadFiles(files);
 	FDBState state = new FDBState(dms);
 	FenixDomainModel domainModel = DOMAIN_PROVIDER.getDomainModel(dms);
@@ -178,5 +182,26 @@ public class FenixDomainBrowserRelayImpl extends RemoteServiceServlet implements
 	} catch (Exception e) {
 	    throw new RuntimeException(e);
 	}
+    }
+
+    @Override
+    public FDBState freshDML() {
+	final String FENIX_DML_URL = "https://fenix-ashes.ist.utl.pt/open/trunk/fenix/config/domain_model.dml";
+	final String SCHEDULER_PLUGIN_URL = "https://fenix-ashes.ist.utl.pt/open/trunk/infrastructure/scheduler-plugin/src/main/dml/scheduler-plugin.dml";
+
+	try {
+	    FileUtils.copyURLToFile(new URL(FENIX_DML_URL), new File("/tmp/fenix.dml"));
+	    FileUtils.copyURLToFile(new URL(SCHEDULER_PLUGIN_URL), new File("/tmp/scheduler.dml"));
+	    OpenFilesState files = new OpenFilesState();
+	    files.files.add("/tmp/scheduler.dml");
+	    files.files.add("/tmp/fenix.dml");
+	    return loadFiles(files);
+
+	} catch (MalformedURLException e) {
+	    throw new RuntimeException(e);
+	} catch (IOException e) {
+	    throw new RuntimeException(e);
+	}
+
     }
 }

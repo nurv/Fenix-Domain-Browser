@@ -13,10 +13,18 @@ import fenixDomainBrowser.shared.FDBState;
 @RemoteServiceRelativePath("greet")
 public interface FenixDomainBrowserRelay extends RemoteService {
     ClassBean[] getDomainClasses(FDBState bean);
-    ClassBean findClass(String name,FDBState bean);
+
+    ClassBean findClass(String name, FDBState bean);
+
     FDBState generateGraph(FDBState bean);
+
     FDBState loadFiles(OpenFilesState files);
+
     String generateSaveFile(FDBState state);
+
     FDBState loadFile(String file);
+
     String saveStateForOtherOps(FDBState state);
+
+    FDBState freshDML();
 }
