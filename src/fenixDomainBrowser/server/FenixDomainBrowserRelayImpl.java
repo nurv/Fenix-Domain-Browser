@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.TreeSet;
 import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -231,10 +232,12 @@ public class FenixDomainBrowserRelayImpl extends RemoteServiceServlet implements
 		boolean mustUpdateDML = mustUpdateDML();
 		OpenFilesState files = new OpenFilesState();
 		Map<String, URL> dmlUrls = ConfigurationProperties.getDMLUrls();
-		for (String dmlFile : dmlUrls.keySet()) {
+		for (String dmlFile : new TreeSet<String>(dmlUrls.keySet())) {
 			try {
 				String filename = DML_PATH + "/" + dmlFile + ".dml";
+				System.out.println(filename);
 				if (mustUpdateDML) {
+					System.out.println("update:" + filename);
 					FileUtils.copyURLToFile(dmlUrls.get(dmlFile), new File(
 							filename));
 				}
