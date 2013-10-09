@@ -1,8 +1,8 @@
 package fenixDomainBrowser.server;
 
-import dml.DomainClass;
-import dml.DomainEntity;
-import dml.Slot;
+import pt.ist.fenixframework.dml.DomainClass;
+import pt.ist.fenixframework.dml.DomainEntity;
+import pt.ist.fenixframework.dml.Slot;
 import fenixDomainBrowser.shared.ClassBean;
 import fenixDomainBrowser.shared.FDBState;
 import fenixDomainBrowser.shared.SlotBean;

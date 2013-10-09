@@ -1,9 +1,7 @@
 package fenixDomainBrowser.server;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,15 +14,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
-import pt.ist.fenixframework.pstm.DML;
-import pt.ist.fenixframework.pstm.dml.FenixDomainModel;
-import pt.ist.fenixframework.pstm.dml.FenixDomainModelWithOCC;
+import pt.ist.fenixframework.DomainModelParser;
+import pt.ist.fenixframework.dml.DomainClass;
+import pt.ist.fenixframework.dml.DomainModel;
+import pt.ist.fenixframework.dml.Slot;
 import sun.misc.BASE64Decoder;
-import dml.DomainClass;
-import dml.Slot;
 import fenixDomainBrowser.client.NewFilesPopup.OpenFilesState;
 import fenixDomainBrowser.server.graphvizAdapter.Dot;
 import fenixDomainBrowser.shared.ClassBean;
@@ -71,9 +67,9 @@ public class DomainModelProvider {
 
     public class LoadedDomainModel {
 
-	private FenixDomainModel domainModel;
+	private DomainModel domainModel;
 	private DomainModelDefinitions domainModelDefinitions;
-	private HashMap<String, List<String>> subclasses = new HashMap<String, List<String>>();
+	private final HashMap<String, List<String>> subclasses = new HashMap<String, List<String>>();
 
 	public LoadedDomainModel(DomainModelDefinitions dmd) {
 	    List<URL> domainModelURLs = new ArrayList<URL>();
@@ -81,7 +77,8 @@ public class DomainModelProvider {
 		for (String string : dmd.fileNames) {
 		    domainModelURLs.add(new File(string).toURL());
 		}
-		domainModel = DML.getDomainModelForURLs(FenixDomainModelWithOCC.class, domainModelURLs, true);
+//		domainModel = DML.getDomainModelForURLs(DomainModelWithOCC.class, domainModelURLs, true);
+		domainModel = DomainModelParser.getDomainModel(domainModelURLs);
 	    } catch (Exception e) {
 		throw new RuntimeException("error loading DML",e);
 	    }
@@ -110,7 +107,7 @@ public class DomainModelProvider {
 	}
     }
 
-    private HashMap<DomainModelSignatures, LoadedDomainModel> domainModels = new HashMap<DomainModelSignatures, DomainModelProvider.LoadedDomainModel>();
+    private final HashMap<DomainModelSignatures, LoadedDomainModel> domainModels = new HashMap<DomainModelSignatures, DomainModelProvider.LoadedDomainModel>();
 
     public DomainModelProvider() {
     }
@@ -134,11 +131,11 @@ public class DomainModelProvider {
 	return domainModels.get(state.getSignature());
     }
 
-    public FenixDomainModel getDomainModel(DomainModelSignatures signature) {
+    public DomainModel getDomainModel(DomainModelSignatures signature) {
 	return getLoadedDomainModel(signature).domainModel;
     }
 
-    public FenixDomainModel getDomainModel(FDBState signature) {
+    public DomainModel getDomainModel(FDBState signature) {
 	return getDomainModel(signature.getSignature());
     }
 
@@ -193,7 +190,7 @@ public class DomainModelProvider {
 		fos.close();
 
 		ZipFile zipFile = new ZipFile(tempZipFile);
-		ZipEntry entry = (ZipEntry) zipFile.entries().nextElement();
+		ZipEntry entry = zipFile.entries().nextElement();
 
 		InputStream eis = zipFile.getInputStream(entry);
 		byte[] buffer = new byte[1024];

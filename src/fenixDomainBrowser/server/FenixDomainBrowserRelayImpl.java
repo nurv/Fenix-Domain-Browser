@@ -9,21 +9,21 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.TreeSet;
 import java.util.Map;
+import java.util.TreeSet;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.RandomStringUtils;
 
-import pt.ist.fenixframework.pstm.dml.FenixDomainModel;
+import pt.ist.fenixframework.dml.DomainClass;
+import pt.ist.fenixframework.dml.DomainModel;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
-import dml.DomainClass;
 import fenixDomainBrowser.client.FenixDomainBrowserRelay;
 import fenixDomainBrowser.client.NewFilesPopup.OpenFilesState;
 import fenixDomainBrowser.server.DomainModelProvider.DomainModelDefinitions;
@@ -45,7 +45,7 @@ public class FenixDomainBrowserRelayImpl extends RemoteServiceServlet implements
 
 	@Override
 	public ClassBean[] getDomainClasses(FDBState bean) {
-		FenixDomainModel fdm = DOMAIN_PROVIDER.getDomainModel(bean
+		DomainModel fdm = DOMAIN_PROVIDER.getDomainModel(bean
 				.getSignature());
 		ClassBean[] cb = new ClassBean[fdm.getDomainClasses().size()];
 		int i = 0;
@@ -110,7 +110,7 @@ public class FenixDomainBrowserRelayImpl extends RemoteServiceServlet implements
 
 		DomainModelSignatures dms = DOMAIN_PROVIDER.loadFiles(files);
 		FDBState state = new FDBState(dms);
-		FenixDomainModel domainModel = DOMAIN_PROVIDER.getDomainModel(dms);
+		DomainModel domainModel = DOMAIN_PROVIDER.getDomainModel(dms);
 		state.setClasses(domainModel.getDomainClasses().size());
 		state.setRelations(domainModel.getDomainRelations().size());
 		state.setValueTypes(domainModel.getAllValueTypes().size());
@@ -209,10 +209,7 @@ public class FenixDomainBrowserRelayImpl extends RemoteServiceServlet implements
 	private void writeDMLStatusFile() {
 		try {
 			File file = new File(DML_STATUS_FILE);
-			if (!file.exists()) {
-				file.createNewFile();
-			}
-			FileUtils.writeStringToFile(file, RandomStringUtils.random(126));
+			FileUtils.writeStringToFile(file, new Date().toString());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
