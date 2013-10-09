@@ -2,14 +2,12 @@ package fenixDomainBrowser.server;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import pt.ist.fenixframework.pstm.dml.FenixDomainModel;
-
-import dml.DomainClass;
-import dml.DomainRelation;
-import dml.Role;
+import pt.ist.fenixframework.dml.DomainClass;
+import pt.ist.fenixframework.dml.DomainModel;
+import pt.ist.fenixframework.dml.DomainRelation;
+import pt.ist.fenixframework.dml.Role;
 import fenixDomainBrowser.server.graphvizAdapter.ClassNode;
 import fenixDomainBrowser.server.graphvizAdapter.Dot;
 import fenixDomainBrowser.server.graphvizAdapter.Graph;
@@ -103,7 +101,7 @@ public class UMLGraph {
     private void addAllClasssesAndRelations(ClassBean classBean) {
 	boolean isExclusive = bean.getExclusiveSelection().contains(classBean);
 
-	FenixDomainModel domainModel = FenixDomainBrowserRelayImpl.DOMAIN_PROVIDER.getDomainModel(bean);
+	DomainModel domainModel = FenixDomainBrowserRelayImpl.DOMAIN_PROVIDER.getDomainModel(bean);
 	DomainClass domainClass = domainModel.findClass(classBean.getId());
 	if (!bean.getHideClasses().contains(classBean)) {
 	    usedClasses.add(classBean);
