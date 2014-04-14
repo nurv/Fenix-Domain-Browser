@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dml.DomainClass;
+import pt.ist.fenixframework.dml.DomainClass;
 import fenixDomainBrowser.server.graphvizAdapter.Dot;
 import fenixDomainBrowser.shared.ClassBean;
 import fenixDomainBrowser.shared.FDBState;

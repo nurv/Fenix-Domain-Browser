@@ -215,10 +215,10 @@ public class Interface extends Composite {
 	    public void onClick(ClickEvent arg0) {
 		final PopupPanel popupPanel = new PopupPanel();
 		popupPanel.setWidth("500px");
-		popupPanel.add(new Label("Loading DML from SVN ..."));
+		popupPanel.add(new Label("Loading DML from GitHub ..."));
 		popupPanel.center();
 		popupPanel.show();
-		RELAY.freshDML(new LoadClassesCallback(popupPanel, "Loading DML from SVN ...", "Fenix Live",
+		RELAY.freshDML(new LoadClassesCallback(popupPanel, "Loading DML from GitHub ...", "Fenix Live",
 			"net.sourceforge.fenixedu.domain"));
 	    }
 	});

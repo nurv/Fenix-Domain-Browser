@@ -8,7 +8,6 @@
 
 	<target name="init">
 		<mkdir dir="${build}" />
-
 	</target>
 
 	<target name="clean">
@@ -51,15 +50,19 @@
 			</classpath>
 		</javac>
 	</target>
-
-	<target name="war" depends="compile,compile-javascript">
+	
+	<target name="war-only">
+		<copy file="configuration.properties" todir="war/WEB-INF/classes"/>
 		<manifest file="MANIFEST.MF">
 			<attribute name="Main-Class" value="fenixDomainBrowser.server.Start" />
 		</manifest>
 		<war basedir="war" destfile="fdb.war" webxml="war/WEB-INF/web.xml">
 			<webinf dir="war/WEB-INF/">
 				<include name="**/*.jar" />
+				<include name="configuration.properties"/>
 			</webinf>
 		</war>
+	</target>
+	<target name="war" depends="compile,compile-javascript, war-only">
 	</target>
 </project>
