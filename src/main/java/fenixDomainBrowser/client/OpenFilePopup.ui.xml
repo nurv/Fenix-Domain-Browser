@@ -1,0 +1,37 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.label {
+			margin-top: 10px;
+			margin-botom: 5px;
+		}
+		
+		.controls {
+			margin-top: 20px;
+			margin-bottom: 10px;
+		}
+		
+		.button {
+			margin-left: 5px;
+		}
+		
+		.impt {
+			border: 2px solid #D0E4F6;
+			background-color: #E2EDF6;
+		}
+	</ui:style>
+
+	<g:VerticalPanel>
+		<g:HTML>
+			<div
+				style='font-weight:bold; width:490px; margin:0px; padding:5px; font-size:20px; background:#C3D9FF; margin-bottom:10px;'>Open File</div>
+		</g:HTML>
+		<g:VerticalPanel ui:field="content">
+			<g:SimplePanel ui:field="uploader">
+
+			</g:SimplePanel>
+		</g:VerticalPanel>
+
+	</g:VerticalPanel>
+</ui:UiBinder> 

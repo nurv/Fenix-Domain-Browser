@@ -1,27 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/gwt-api-checker.jar"/>
-	<classpathentry kind="lib" path="lib/gwt-dev.jar"/>
-	<classpathentry kind="lib" path="lib/gwt-servlet-deps.jar"/>
-	<classpathentry kind="lib" path="lib/gwt-servlet.jar"/>
-	<classpathentry kind="lib" path="lib/gwt-soyc-vis.jar"/>
-	<classpathentry kind="lib" path="lib/gwt-user.jar"/>
-	<classpathentry kind="lib" path="lib/validation-api-1.0.0.GA-sources.jar"/>
-	<classpathentry kind="lib" path="lib/validation-api-1.0.0.GA.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/antlr.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-fileupload-1.2.2.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-io-2.0.1.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/flexjson-2.1.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-servlet.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/gwtupload-0.6.3-compat.jar" sourcepath="/home/sfbs/.m2/repository/com/googlecode/gwtupload/gwtupload/0.6.3-compat/gwtupload-0.6.3-compat-sources.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/log4j-1.2.16.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/dml-1.1.3.jar" sourcepath="/dml"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/fenix-framework-core-1.1.3.jar" sourcepath="/fenix-framework-core"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/dml-fenix-1.1.3.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/dml"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/dml-fenix"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/fenix-framework-core"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="target/classes"/>
 </classpath>
