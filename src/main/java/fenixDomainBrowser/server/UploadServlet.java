@@ -14,24 +14,24 @@ public class UploadServlet extends UploadAction {
 
     @Override
     public String executeAction(HttpServletRequest request, List<FileItem> sessionFiles) throws UploadActionException {
-	String response = "";
-	int cont = 0;
-	for (FileItem item : sessionFiles) {
-	    if (false == item.isFormField()) {
-		cont++;
-		try {
-		    File file = File.createTempFile("upload-", ".fdbTemp");
-		    item.write(file);
-		    response += file.getAbsolutePath();
+        String response = "";
+        int cont = 0;
+        for (FileItem item : sessionFiles) {
+            if (false == item.isFormField()) {
+                cont++;
+                try {
+                    File file = File.createTempFile("upload-", ".fdbTemp");
+                    item.write(file);
+                    response += file.getAbsolutePath();
 
-		} catch (Exception e) {
-		    throw new UploadActionException(e);
-		}
-	    }
-	}
+                } catch (Exception e) {
+                    throw new UploadActionException(e);
+                }
+            }
+        }
 
-	removeSessionFileItems(request);
-	return response;
+        removeSessionFileItems(request);
+        return response;
     }
 
 }

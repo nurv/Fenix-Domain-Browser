@@ -18,40 +18,39 @@ public class InformationPopup extends PopupPanel {
 
     interface InformationPopupUiBinder extends UiBinder<Widget, InformationPopup> {
     }
-    
+
     @UiField
     TextBox modelName;
-    
+
     @UiField
     Label valueTypes;
-    
+
     @UiField
     Label entities;
-    
+
     @UiField
     Label relations;
-    
 
     public InformationPopup() {
-	add(uiBinder.createAndBindUi(this));
-	setGlassEnabled(true);
-	FDBState currentState = Interface.currentState;
-	modelName.setText(currentState.getModelName());
-	valueTypes.setText("" + currentState.getValueTypes());
-	entities.setText("" + currentState.getClasses());
-	relations.setText("" + currentState.getRelations());
-	center();
+        add(uiBinder.createAndBindUi(this));
+        setGlassEnabled(true);
+        FDBState currentState = Interface.currentState;
+        modelName.setText(currentState.getModelName());
+        valueTypes.setText("" + currentState.getValueTypes());
+        entities.setText("" + currentState.getClasses());
+        relations.setText("" + currentState.getRelations());
+        center();
     }
 
     @UiHandler("cancel")
     void onCancelClick(ClickEvent event) {
-	this.hide();
+        this.hide();
     }
 
     @UiHandler("save")
     void onSaveClick(ClickEvent event) {
-	Interface.currentState.setModelName(modelName.getText());
-	Interface.currentInterface.setModelName(modelName.getText());
-	this.hide();
+        Interface.currentState.setModelName(modelName.getText());
+        Interface.currentInterface.setModelName(modelName.getText());
+        this.hide();
     }
 }

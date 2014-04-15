@@ -36,152 +36,155 @@ public class ClassSelected extends Composite implements RequiresResize {
     }
 
     public ClassSelected() {
-	initWidget(uiBinder.createAndBindUi(this));
+        initWidget(uiBinder.createAndBindUi(this));
     }
 
     public void setClasses() {
-	panel.clear();
-	ArrayList<ClassBean> cl = new ArrayList<ClassBean>(Interface.currentState.getClassesInGraph());
-	Collections.sort(cl);
-	for (final ClassBean element : cl) {
+        panel.clear();
+        ArrayList<ClassBean> cl = new ArrayList<ClassBean>(Interface.currentState.getClassesInGraph());
+        Collections.sort(cl);
+        for (final ClassBean element : cl) {
 
-	    HorizontalPanel line = new HorizontalPanel();
-	    line.setVerticalAlignment(HorizontalPanel.ALIGN_MIDDLE);
-	    if (!Interface.currentState.getClassesToSee().contains(element)) {
-		final ToggleButton hide = new ToggleButton(new Image(FenixDomainBrowser.getContext() + "/icons/eye--minus.png"),
-			new Image(FenixDomainBrowser.getContext() + "/icons/eye--plus.png"));
-		if (Interface.currentState.getHideClasses().contains(element)) {
-		    hide.setDown(true);
-		}
-		hide.setStyleName("icon");
-		hide.addClickHandler(new ClickHandler() {
+            HorizontalPanel line = new HorizontalPanel();
+            line.setVerticalAlignment(HorizontalPanel.ALIGN_MIDDLE);
+            if (!Interface.currentState.getClassesToSee().contains(element)) {
+                final ToggleButton hide =
+                        new ToggleButton(new Image(FenixDomainBrowser.getContext() + "/icons/eye--minus.png"), new Image(
+                                FenixDomainBrowser.getContext() + "/icons/eye--plus.png"));
+                if (Interface.currentState.getHideClasses().contains(element)) {
+                    hide.setDown(true);
+                }
+                hide.setStyleName("icon");
+                hide.addClickHandler(new ClickHandler() {
 
-		    @Override
-		    public void onClick(ClickEvent event) {
-			if (hide.isDown()) {
-			    Interface.currentState.addHideClasses(element);
-			} else {
-			    Interface.currentState.removeHideClasses(element);
-			}
-			Interface.refresh();
-		    }
-		});
+                    @Override
+                    public void onClick(ClickEvent event) {
+                        if (hide.isDown()) {
+                            Interface.currentState.addHideClasses(element);
+                        } else {
+                            Interface.currentState.removeHideClasses(element);
+                        }
+                        Interface.refresh();
+                    }
+                });
 
-		line.add(hide);
-	    } else {
-		final ToggleButton hide = new ToggleButton(
-			new Image(FenixDomainBrowser.getContext() + "/icons/minus-button.png"), new Image(
-				FenixDomainBrowser.getContext() + "icons/plus-button.png"));
-		if (Interface.currentState.getHideClasses().contains(element)) {
-		    hide.setDown(true);
-		}
-		hide.setStyleName("icon");
-		hide.addClickHandler(new ClickHandler() {
+                line.add(hide);
+            } else {
+                final ToggleButton hide =
+                        new ToggleButton(new Image(FenixDomainBrowser.getContext() + "/icons/minus-button.png"), new Image(
+                                FenixDomainBrowser.getContext() + "icons/plus-button.png"));
+                if (Interface.currentState.getHideClasses().contains(element)) {
+                    hide.setDown(true);
+                }
+                hide.setStyleName("icon");
+                hide.addClickHandler(new ClickHandler() {
 
-		    @Override
-		    public void onClick(ClickEvent event) {
-			Interface.currentState.removeClassesToSee(element);
-			Interface.refresh();
-		    }
-		});
+                    @Override
+                    public void onClick(ClickEvent event) {
+                        Interface.currentState.removeClassesToSee(element);
+                        Interface.refresh();
+                    }
+                });
 
-		line.add(hide);
-	    }
+                line.add(hide);
+            }
 
-	    if (!Interface.currentState.getHideAllSlots()) {
-		final ToggleButton slots = new ToggleButton(new Image(FenixDomainBrowser.getContext()
-			+ "/icons/document-attribute-e.png"), new Image(FenixDomainBrowser.getContext()
-			+ "/icons/document-list.png"));
-		if (Interface.currentState.getHideSlots().contains(element)) {
-		    slots.setDown(true);
-		}
-		slots.addClickHandler(new ClickHandler() {
+            if (!Interface.currentState.getHideAllSlots()) {
+                final ToggleButton slots =
+                        new ToggleButton(new Image(FenixDomainBrowser.getContext() + "/icons/document-attribute-e.png"),
+                                new Image(FenixDomainBrowser.getContext() + "/icons/document-list.png"));
+                if (Interface.currentState.getHideSlots().contains(element)) {
+                    slots.setDown(true);
+                }
+                slots.addClickHandler(new ClickHandler() {
 
-		    @Override
-		    public void onClick(ClickEvent event) {
-			if (slots.isDown()) {
-			    Interface.currentState.addHideSlots(element);
-			} else {
-			    Interface.currentState.removeHideSlots(element);
-			}
-			Interface.refresh();
-		    }
+                    @Override
+                    public void onClick(ClickEvent event) {
+                        if (slots.isDown()) {
+                            Interface.currentState.addHideSlots(element);
+                        } else {
+                            Interface.currentState.removeHideSlots(element);
+                        }
+                        Interface.refresh();
+                    }
 
-		});
-		slots.setStyleName("icon");
-		line.add(slots);
-	    }
+                });
+                slots.setStyleName("icon");
+                line.add(slots);
+            }
 
-	    if (Interface.currentState.getRelationExploration() && Interface.currentState.getClassesToSee().contains(element)) {
-		final ToggleButton other = new ToggleButton(new Image(FenixDomainBrowser.getContext() + "/icons/leaf.png"),
-			new Image(FenixDomainBrowser.getContext() + "/icons/leaf-plant.png"));
-		if (Interface.currentState.getExclusiveSelection().contains(element)) {
-		    other.setDown(true);
-		}
-		other.setStyleName("icon");
-		other.addClickHandler(new ClickHandler() {
+            if (Interface.currentState.getRelationExploration() && Interface.currentState.getClassesToSee().contains(element)) {
+                final ToggleButton other =
+                        new ToggleButton(new Image(FenixDomainBrowser.getContext() + "/icons/leaf.png"), new Image(
+                                FenixDomainBrowser.getContext() + "/icons/leaf-plant.png"));
+                if (Interface.currentState.getExclusiveSelection().contains(element)) {
+                    other.setDown(true);
+                }
+                other.setStyleName("icon");
+                other.addClickHandler(new ClickHandler() {
 
-		    @Override
-		    public void onClick(ClickEvent event) {
-			if (other.isDown()) {
-			    Interface.currentState.addExclusiveSelection(element);
-			} else {
-			    Interface.currentState.removeExclusiveSelection(element);
-			}
-			Interface.refresh();
-		    }
-		});
-		line.add(other);
-	    }
+                    @Override
+                    public void onClick(ClickEvent event) {
+                        if (other.isDown()) {
+                            Interface.currentState.addExclusiveSelection(element);
+                        } else {
+                            Interface.currentState.removeExclusiveSelection(element);
+                        }
+                        Interface.refresh();
+                    }
+                });
+                line.add(other);
+            }
 
-	    Anchor a = new Anchor(element.getQualifiedName());
-	    a.addClickHandler(new ClickHandler() {
+            Anchor a = new Anchor(element.getQualifiedName());
+            a.addClickHandler(new ClickHandler() {
 
-		@Override
-		public void onClick(ClickEvent event) {
-		    Interface.currentState.addClassesToSee(element);
-		    Interface.refresh();
-		}
-	    });
-	    line.add(a);
-	    panel.add(line);
-	}
+                @Override
+                public void onClick(ClickEvent event) {
+                    Interface.currentState.addClassesToSee(element);
+                    Interface.refresh();
+                }
+            });
+            line.add(a);
+            panel.add(line);
+        }
 
-	for (final ClassBean classBean : Interface.currentState.getHideClasses()) {
-	    HorizontalPanel line = new HorizontalPanel();
-	    line.setVerticalAlignment(HorizontalPanel.ALIGN_MIDDLE);
+        for (final ClassBean classBean : Interface.currentState.getHideClasses()) {
+            HorizontalPanel line = new HorizontalPanel();
+            line.setVerticalAlignment(HorizontalPanel.ALIGN_MIDDLE);
 
-	    final ToggleButton hide = new ToggleButton(new Image(FenixDomainBrowser.getContext() + "/icons/eye--minus.png"),
-		    new Image(FenixDomainBrowser.getContext() + "/icons/eye--plus.png"));
-	    if (Interface.currentState.getHideClasses().contains(classBean)) {
-		hide.setDown(true);
-	    }
-	    hide.setStyleName("icon");
+            final ToggleButton hide =
+                    new ToggleButton(new Image(FenixDomainBrowser.getContext() + "/icons/eye--minus.png"), new Image(
+                            FenixDomainBrowser.getContext() + "/icons/eye--plus.png"));
+            if (Interface.currentState.getHideClasses().contains(classBean)) {
+                hide.setDown(true);
+            }
+            hide.setStyleName("icon");
 
-	    hide.setDown(true);
-	    hide.addClickHandler(new ClickHandler() {
+            hide.setDown(true);
+            hide.addClickHandler(new ClickHandler() {
 
-		@Override
-		public void onClick(ClickEvent event) {
-		    if (hide.isDown()) {
-			Interface.currentState.addHideClasses(classBean);
-		    } else {
-			Interface.currentState.removeHideClasses(classBean);
-		    }
-		    Interface.refresh();
-		}
-	    });
+                @Override
+                public void onClick(ClickEvent event) {
+                    if (hide.isDown()) {
+                        Interface.currentState.addHideClasses(classBean);
+                    } else {
+                        Interface.currentState.removeHideClasses(classBean);
+                    }
+                    Interface.refresh();
+                }
+            });
 
-	    line.add(hide);
-	    Label a = new Label(classBean.getQualifiedName());
+            line.add(hide);
+            Label a = new Label(classBean.getQualifiedName());
 
-	    line.add(a);
-	    panel.add(line);
-	}
+            line.add(a);
+            panel.add(line);
+        }
     }
 
     @Override
     public void onResize() {
-	scrollPanel.onResize();
+        scrollPanel.onResize();
     }
 }

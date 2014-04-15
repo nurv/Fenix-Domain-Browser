@@ -41,51 +41,51 @@ public class ClassSearch extends Composite {
     public SingleSelectionModel<ClassBean> selectionModel;
 
     public ClassSearch() {
-	initWidget(uiBinder.createAndBindUi(this));
-	list.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
-	selectionModel = new SingleSelectionModel<ClassBean>(ClassBean.KEY_PROVIDER);
-	list.setSelectionModel(selectionModel);
-	selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
-	    public void onSelectionChange(SelectionChangeEvent event) {
-		ClassBean b = selectionModel.getSelectedObject();
-		FDBState bean = Interface.currentState;
-		History.newItem("seeClass:" + b.getId());
-		Interface.refresh();
-	    }
-	});
-	searchField.addKeyPressHandler(new KeyPressHandler() {
+        initWidget(uiBinder.createAndBindUi(this));
+        list.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+        selectionModel = new SingleSelectionModel<ClassBean>(ClassBean.KEY_PROVIDER);
+        list.setSelectionModel(selectionModel);
+        selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+            public void onSelectionChange(SelectionChangeEvent event) {
+                ClassBean b = selectionModel.getSelectedObject();
+                FDBState bean = Interface.currentState;
+                History.newItem("seeClass:" + b.getId());
+                Interface.refresh();
+            }
+        });
+        searchField.addKeyPressHandler(new KeyPressHandler() {
 
-	    @Override
-	    public void onKeyPress(KeyPressEvent event) {
-		String text = searchField.getText();
-		if (!searchField.getText().equals("")) {
-		    List<ClassBean> l = allClasses;
-		    TreeMap<Double, ClassBean> data = new TreeMap<Double, ClassBean>();
-		    for (ClassBean classBean : l) {
-			double score = QuickSilverSearchAlgorithm.score(classBean.getQualifiedName(), text, 0);
-			data.put(score, classBean);
-		    }
-		    setData(new ArrayList<ClassBean>(data.values()));
-		}else{
-		    setData(allClasses);
-		}
-	    }
+            @Override
+            public void onKeyPress(KeyPressEvent event) {
+                String text = searchField.getText();
+                if (!searchField.getText().equals("")) {
+                    List<ClassBean> l = allClasses;
+                    TreeMap<Double, ClassBean> data = new TreeMap<Double, ClassBean>();
+                    for (ClassBean classBean : l) {
+                        double score = QuickSilverSearchAlgorithm.score(classBean.getQualifiedName(), text, 0);
+                        data.put(score, classBean);
+                    }
+                    setData(new ArrayList<ClassBean>(data.values()));
+                } else {
+                    setData(allClasses);
+                }
+            }
 
-	});
+        });
     }
 
     public void setData(List<ClassBean> a) {
-	list.setRowCount(a.size());
-	list.setRowData(a);
+        list.setRowCount(a.size());
+        list.setRowData(a);
     }
 
     public ClassBean getClassBeanForName(String name) {
-	for (ClassBean cl : allClasses) {
-	    if (cl.getId().equals(name)) {
-		return cl;
-	    }
-	}
-	return null;
+        for (ClassBean cl : allClasses) {
+            if (cl.getId().equals(name)) {
+                return cl;
+            }
+        }
+        return null;
     }
 
 }

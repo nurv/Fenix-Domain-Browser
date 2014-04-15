@@ -1,6 +1,5 @@
 package fenixDomainBrowser.server;
 
-
 import pt.ist.fenixframework.dml.DomainClass;
 import pt.ist.fenixframework.dml.DomainEntity;
 import pt.ist.fenixframework.dml.Slot;

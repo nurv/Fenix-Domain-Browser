@@ -23,9 +23,9 @@ public class DashBoard extends Composite {
 
     @UiField(provided = true)
     ClassSearch search = new ClassSearch();
-    
+
     public DashBoard() {
-	initWidget(uiBinder.createAndBindUi(this));
+        initWidget(uiBinder.createAndBindUi(this));
     }
 
 }

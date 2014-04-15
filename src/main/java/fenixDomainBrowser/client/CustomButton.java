@@ -16,81 +16,81 @@ public class CustomButton extends Button {
     private boolean down = false;
 
     public CustomButton() {
-	super();
+        super();
     }
 
     public CustomButton(String up, String down) {
-	super();
-	setImageUp(up);
-	setImageDown(down);
-	addClickHandler(new ClickHandler() {
-	    @Override
-	    public void onClick(ClickEvent event) {
-		setDown(!isDown());
-	    }
-	});
-	setDown(false);
+        super();
+        setImageUp(up);
+        setImageDown(down);
+        addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                setDown(!isDown());
+            }
+        });
+        setDown(false);
     }
 
     public boolean isDown() {
-	return down;
+        return down;
     }
 
     public void setDown(boolean value) {
-	this.down = value;
-	update();
+        this.down = value;
+        update();
     }
 
     private void update() {
-	if (down && imageDown != null) {
-	    setImage(getImageDown());
-	    placed = getImageDown();
-	} else {
-	    if (imageUp != null) {
-		setImage(getImageUp());
-		placed = getImageUp();
-	    }
-	}
+        if (down && imageDown != null) {
+            setImage(getImageDown());
+            placed = getImageDown();
+        } else {
+            if (imageUp != null) {
+                setImage(getImageUp());
+                placed = getImageUp();
+            }
+        }
     }
 
     private void setImage(Image img) {
-	String definedStyles = img.getElement().getAttribute("style");
-	img.getElement().setAttribute("style", definedStyles + "; vertical-align:middle;");
-	if (placed != null) {
-	    DOM.removeChild(getElement(), placed.getElement());
-	}
-	DOM.insertBefore(getElement(), img.getElement(), DOM.getFirstChild(getElement()));
+        String definedStyles = img.getElement().getAttribute("style");
+        img.getElement().setAttribute("style", definedStyles + "; vertical-align:middle;");
+        if (placed != null) {
+            DOM.removeChild(getElement(), placed.getElement());
+        }
+        DOM.insertBefore(getElement(), img.getElement(), DOM.getFirstChild(getElement()));
     }
 
     @Override
     public void setText(String text) {
-	this.text = text;
-	Element span = DOM.createElement("span");
-	span.setInnerText(text);
-	span.setAttribute("style", "padding-left:3px; vertical-align:middle;");
-	DOM.insertChild(getElement(), span, 0);
+        this.text = text;
+        Element span = DOM.createElement("span");
+        span.setInnerText(text);
+        span.setAttribute("style", "padding-left:3px; vertical-align:middle;");
+        DOM.insertChild(getElement(), span, 0);
     }
 
     @Override
     public String getText() {
-	return this.text;
+        return this.text;
     }
 
     public void setImageDown(String imageDown) {
-	this.imageDown = new Image(FenixDomainBrowser.getContext() + imageUp);
-	update();
+        this.imageDown = new Image(FenixDomainBrowser.getContext() + imageUp);
+        update();
     }
 
     public Image getImageDown() {
-	return imageDown;
+        return imageDown;
     }
 
     public void setImageUp(String imageUp) {
-	this.imageUp = new Image(FenixDomainBrowser.getContext() + imageUp);
-	update();
+        this.imageUp = new Image(FenixDomainBrowser.getContext() + imageUp);
+        update();
     }
 
     public Image getImageUp() {
-	return imageUp;
+        return imageUp;
     }
 }

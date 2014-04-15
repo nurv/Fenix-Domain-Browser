@@ -3,7 +3,6 @@ package fenixDomainBrowser.server.graphvizAdapter;
 import pt.ist.fenixframework.dml.DomainRelation;
 import pt.ist.fenixframework.dml.Role;
 
-
 public class RelationEdge extends Edge {
     private final DomainRelation relation;
 

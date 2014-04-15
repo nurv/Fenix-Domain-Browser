@@ -35,73 +35,73 @@ public class OpenFilePopup extends PopupPanel {
     boolean loading;
 
     public OpenFilePopup() {
-	super(true);
-	add(uiBinder.createAndBindUi(this));
-	setGlassEnabled(true);
-	setWidth("500px");
+        super(true);
+        add(uiBinder.createAndBindUi(this));
+        setGlassEnabled(true);
+        setWidth("500px");
 
-	SingleUploader uploader = new SingleUploader();
-	this.uploader.add(uploader);
-	uploader.addOnFinishUploadHandler(new OnFinishUploaderHandler() {
+        SingleUploader uploader = new SingleUploader();
+        this.uploader.add(uploader);
+        uploader.addOnFinishUploadHandler(new OnFinishUploaderHandler() {
 
-	    @Override
-	    public void onFinish(IUploader uploader) {
-		if (uploader.getStatus() == Status.SUCCESS) {
-		    if (!loading) {
-			loading = true;
-			content.clear();
+            @Override
+            public void onFinish(IUploader uploader) {
+                if (uploader.getStatus() == Status.SUCCESS) {
+                    if (!loading) {
+                        loading = true;
+                        content.clear();
 
-			final Label label = new Label("Loading...");
-			content.add(label);
-			center();
-			Interface.RELAY.loadFile(uploader.getServerInfo().message, new AsyncCallback<FDBState>() {
+                        final Label label = new Label("Loading...");
+                        content.add(label);
+                        center();
+                        Interface.RELAY.loadFile(uploader.getServerInfo().message, new AsyncCallback<FDBState>() {
 
-			    @Override
-			    public void onSuccess(final FDBState state) {
+                            @Override
+                            public void onSuccess(final FDBState state) {
 
-				label.setText("Loading classes...");
-				Interface.currentState = state;
-				Interface.currentInterface.setModelName(state.getModelName());
-				Interface.currentInterface.overall.remove(Interface.currentInterface.content);
-				Interface.currentInterface.dashboard = new DashBoard();
-				Interface.currentInterface.content = Interface.currentInterface.dashboard;
-				Interface.currentInterface.overall.add(Interface.currentInterface.dashboard);
-				Interface.currentInterface.relationExplorationButton.setDown(state.getRelationExploration());
-				Interface.currentInterface.singleLabelRelationButton.setDown(state.getSingleLabelRelations());
-				Interface.currentInterface.hsallslotsButton.setDown(state.getHideAllSlots());
+                                label.setText("Loading classes...");
+                                Interface.currentState = state;
+                                Interface.currentInterface.setModelName(state.getModelName());
+                                Interface.currentInterface.overall.remove(Interface.currentInterface.content);
+                                Interface.currentInterface.dashboard = new DashBoard();
+                                Interface.currentInterface.content = Interface.currentInterface.dashboard;
+                                Interface.currentInterface.overall.add(Interface.currentInterface.dashboard);
+                                Interface.currentInterface.relationExplorationButton.setDown(state.getRelationExploration());
+                                Interface.currentInterface.singleLabelRelationButton.setDown(state.getSingleLabelRelations());
+                                Interface.currentInterface.hsallslotsButton.setDown(state.getHideAllSlots());
 
-				Interface.RELAY.getDomainClasses(state, new AsyncCallback<ClassBean[]>() {
+                                Interface.RELAY.getDomainClasses(state, new AsyncCallback<ClassBean[]>() {
 
-				    @Override
-				    public void onSuccess(ClassBean[] result) {
-					Interface.currentInterface.dashboard.search.allClasses = Arrays.asList(result);
-					Interface.currentInterface.dashboard.search
-						.setData(Interface.currentInterface.dashboard.search.allClasses);
-					Interface.refresh(state);
-					hide();
-				    }
+                                    @Override
+                                    public void onSuccess(ClassBean[] result) {
+                                        Interface.currentInterface.dashboard.search.allClasses = Arrays.asList(result);
+                                        Interface.currentInterface.dashboard.search
+                                                .setData(Interface.currentInterface.dashboard.search.allClasses);
+                                        Interface.refresh(state);
+                                        hide();
+                                    }
 
-				    @Override
-				    public void onFailure(Throwable caught) {
-					new ErrorPopup(caught).show();
-				    }
+                                    @Override
+                                    public void onFailure(Throwable caught) {
+                                        new ErrorPopup(caught).show();
+                                    }
 
-				});
+                                });
 
-			    }
+                            }
 
-			    @Override
-			    public void onFailure(Throwable caught) {
-				new ErrorPopup(caught).show();
+                            @Override
+                            public void onFailure(Throwable caught) {
+                                new ErrorPopup(caught).show();
 
-			    }
-			});
-		    } else {
-			return;
-		    }
-		}
-	    }
-	});
-	center();
+                            }
+                        });
+                    } else {
+                        return;
+                    }
+                }
+            }
+        });
+        center();
     }
 }

@@ -31,187 +31,187 @@ public class FDBState implements Serializable {
     }
 
     public FDBState(DomainModelSignatures signature) {
-	this.setSignature(signature);
+        this.setSignature(signature);
     }
 
     public Boolean getRelationExploration() {
-	return relationExploration;
+        return relationExploration;
     }
 
     public void setRelationExploration(Boolean relationExploration) {
-	this.relationExploration = relationExploration;
+        this.relationExploration = relationExploration;
     }
 
     public Boolean getSeeDomainObject() {
-	return seeDomainObject;
+        return seeDomainObject;
     }
 
     public void setSeeDomainObject(Boolean seeDomainObject) {
-	this.seeDomainObject = seeDomainObject;
+        this.seeDomainObject = seeDomainObject;
     }
 
     public Boolean getSeeRootDomainObject() {
-	return seeRootDomainObject;
+        return seeRootDomainObject;
     }
 
     public void setSeeRootDomainObject(Boolean seeRootDomainObject) {
-	this.seeRootDomainObject = seeRootDomainObject;
+        this.seeRootDomainObject = seeRootDomainObject;
     }
 
     public Boolean getSingleLabelRelations() {
-	return singleLabelRelations;
+        return singleLabelRelations;
     }
 
     public void setSingleLabelRelations(Boolean singleLabelRelations) {
-	this.singleLabelRelations = singleLabelRelations;
+        this.singleLabelRelations = singleLabelRelations;
     }
 
     public Boolean getSeeSlots() {
-	return seeSlots;
+        return seeSlots;
     }
 
     public void setSeeSlots(Boolean seeSlots) {
-	this.seeSlots = seeSlots;
+        this.seeSlots = seeSlots;
     }
 
     public ArrayList<ClassBean> getClassesToSee() {
-	return classesToSee;
+        return classesToSee;
     }
 
     public void addClassesToSee(ClassBean cl) {
-	addClassesToSee(cl, false);
+        addClassesToSee(cl, false);
     }
-    
-    public void addClassesToSee(ClassBean cl,boolean silent) {
-	if (!silent && classesToSee.size() > 0){
-	    History.newItem("seeClass:" + classesToSee.get(classesToSee.size() - 1).getId());
-	}
-	if (!relationExploration) {
-	    classesToSee.clear();
-	}
-	if (!classesToSee.contains(cl)) {
-	    classesToSee.add(cl);
-	} else {
-	    classesToSee.remove(cl);
-	    classesToSee.add(cl);
-	}
+
+    public void addClassesToSee(ClassBean cl, boolean silent) {
+        if (!silent && classesToSee.size() > 0) {
+            History.newItem("seeClass:" + classesToSee.get(classesToSee.size() - 1).getId());
+        }
+        if (!relationExploration) {
+            classesToSee.clear();
+        }
+        if (!classesToSee.contains(cl)) {
+            classesToSee.add(cl);
+        } else {
+            classesToSee.remove(cl);
+            classesToSee.add(cl);
+        }
     }
 
     public void removeClassesToSee(ClassBean cl) {
-	classesToSee.remove(cl);
+        classesToSee.remove(cl);
     }
 
     public void setCurrentGraph(String currentGraph) {
-	this.currentGraph = currentGraph;
+        this.currentGraph = currentGraph;
     }
 
     public String getCurrentGraph() {
-	return currentGraph;
+        return currentGraph;
     }
 
     public ArrayList<ClassBean> getClassesInGraph() {
-	return classesInGraph;
+        return classesInGraph;
     }
 
     public void setNewGraph(String graph, Collection<ClassBean> classes) {
-	this.currentGraph = graph;
-	this.classesInGraph = new ArrayList<ClassBean>(classes);
+        this.currentGraph = graph;
+        this.classesInGraph = new ArrayList<ClassBean>(classes);
     }
 
     public void addHideSlots(ClassBean cl) {
-	this.hideSlots.add(cl);
+        this.hideSlots.add(cl);
     }
 
     public void clearHideSlots() {
-	this.hideSlots.clear();
+        this.hideSlots.clear();
     }
 
     public ArrayList<ClassBean> getHideSlots() {
-	return hideSlots;
+        return hideSlots;
     }
 
     public void removeHideSlots(ClassBean element) {
-	this.hideSlots.remove(element);
+        this.hideSlots.remove(element);
     }
 
     public void setHideAllSlots(boolean hideAllSlots) {
-	this.hideAllSlots = hideAllSlots;
+        this.hideAllSlots = hideAllSlots;
     }
 
     public boolean getHideAllSlots() {
-	return hideAllSlots;
+        return hideAllSlots;
     }
 
     public void addHideClasses(ClassBean cl) {
-	this.hideClasses.add(cl);
+        this.hideClasses.add(cl);
     }
 
     public void removeHideClasses(ClassBean cl) {
-	this.hideClasses.remove(cl);
+        this.hideClasses.remove(cl);
     }
 
     public ArrayList<ClassBean> getHideClasses() {
-	return hideClasses;
+        return hideClasses;
     }
 
     public void addExclusiveSelection(ClassBean classBean) {
-	this.exclusiveSelection.add(classBean);
+        this.exclusiveSelection.add(classBean);
     }
 
     public void removeExclusiveSelection(ClassBean classBean) {
-	this.exclusiveSelection.remove(classBean);
+        this.exclusiveSelection.remove(classBean);
     }
 
     public ArrayList<ClassBean> getExclusiveSelection() {
-	return exclusiveSelection;
+        return exclusiveSelection;
     }
 
     public DomainModelSignatures getSignature() {
-	return signature;
+        return signature;
     }
 
     public void setModelName(String modelName) {
-	this.modelName = modelName;
+        this.modelName = modelName;
     }
 
     public String getModelName() {
-	return modelName;
+        return modelName;
     }
 
     public void setModelPackageHeader(String modelPackageHeader) {
-	this.modelPackageHeader = modelPackageHeader;
+        this.modelPackageHeader = modelPackageHeader;
     }
 
     public String getModelPackageHeader() {
-	return modelPackageHeader;
+        return modelPackageHeader;
     }
 
     public void setSignature(DomainModelSignatures signature) {
-	this.signature = signature;
+        this.signature = signature;
     }
 
     public void setClasses(int classes) {
-	this.classes = classes;
+        this.classes = classes;
     }
 
     public int getClasses() {
-	return classes;
+        return classes;
     }
 
     public void setRelations(int relations) {
-	this.relations = relations;
+        this.relations = relations;
     }
 
     public int getRelations() {
-	return relations;
+        return relations;
     }
 
     public void setValueTypes(int valueTypes) {
-	this.valueTypes = valueTypes;
+        this.valueTypes = valueTypes;
     }
 
     public int getValueTypes() {
-	return valueTypes;
+        return valueTypes;
     }
 
 }

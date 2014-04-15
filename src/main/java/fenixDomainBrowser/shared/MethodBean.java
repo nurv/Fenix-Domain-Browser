@@ -9,5 +9,5 @@ public class MethodBean implements Serializable {
     public String name;
     public boolean isStatic;
     public ArrayList<String> args = new ArrayList<String>();
-    
+
 }

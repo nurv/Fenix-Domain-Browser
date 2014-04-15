@@ -17,7 +17,7 @@ public class ImageServlet extends javax.servlet.http.HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String file = Dot.slurp(new String(Base64.decodeBase64(req.getParameter("filename").getBytes())));
-        
+
         FDBState state = new JSONDeserializer<FDBState>().deserialize(file);
         UMLGraph g = new UMLGraph(state);
         byte[] s = g.generateImage();

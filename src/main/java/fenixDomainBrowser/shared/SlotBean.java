@@ -11,26 +11,26 @@ public class SlotBean implements Serializable {
     }
 
     public String getType() {
-	return type;
+        return type;
     }
 
     public void setType(String type) {
-	this.type = type;
+        this.type = type;
     }
 
     public String getName() {
-	return name;
+        return name;
     }
 
     public void setName(String name) {
-	this.name = name;
+        this.name = name;
     }
 
     public void setTypePackage(String typePackage) {
-	this.typePackage = typePackage;
+        this.typePackage = typePackage;
     }
 
     public String getTypePackage() {
-	return typePackage;
+        return typePackage;
     }
 }
