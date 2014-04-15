@@ -66,6 +66,16 @@
 		<url-pattern>/imageFile</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>downloadEntity</servlet-name>
+		<servlet-class>fenixDomainBrowser.server.EntititesServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>downloadEntity</servlet-name>
+		<url-pattern>/downloadEntity</url-pattern>
+	</servlet-mapping>
+
+
 	<!-- Default page to serve -->
 	<welcome-file-list>
 		<welcome-file>Fdb2.html</welcome-file>

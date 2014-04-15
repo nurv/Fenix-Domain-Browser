@@ -70,6 +70,9 @@ public class Interface extends Composite {
     @UiField
     CustomButton freshDML;
 
+    @UiField
+    CustomButton peter;
+
     DashBoard dashboard;
 
     public Interface() {
@@ -201,6 +204,29 @@ public class Interface extends Composite {
                 }
             }
         });
+
+        peter.addClickHandler(new ClickHandler() {
+
+            @Override
+            public void onClick(ClickEvent event) {
+                final Object win = openWindow();
+                if (currentState != null && currentState.getClassesInGraph().size() > 0) {
+                    RELAY.saveStateForOtherOps(Interface.currentState, new AsyncCallback<String>() {
+
+                        @Override
+                        public void onFailure(Throwable caught) {
+                            new ErrorPopup(caught).show();
+                        }
+
+                        @Override
+                        public void onSuccess(String result) {
+                            changeUrl(GWT.getHostPageBaseURL() + "downloadEntity?filename=" + result, win);
+                        }
+                    });
+                }
+            }
+        });
+
         modelName.addClickHandler(new ClickHandler() {
 
             @Override
@@ -215,7 +241,7 @@ public class Interface extends Composite {
             public void onClick(ClickEvent arg0) {
                 final PopupPanel popupPanel = new PopupPanel();
                 popupPanel.setWidth("500px");
-                popupPanel.add(new Label("Loading DML from SVN ..."));
+                popupPanel.add(new Label("Loading DML ..."));
                 popupPanel.center();
                 popupPanel.show();
                 RELAY.freshDML(new LoadClassesCallback(popupPanel, "Loading DML from SVN ...", "Fenix Live",
